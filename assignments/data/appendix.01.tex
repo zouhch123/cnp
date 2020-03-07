@@ -1,0 +1,256 @@
+当一个软件项目涉及不同功能的多个文件时，
+工程师们通常会将这些文件按照某种规则组织在一个目录（文件夹）下面，
+这个目录常常被称为项目“工程”（Project）。
+
+如何组织一个“工程”的目录结构，常规上被认为是工程师的个人风格问题，
+但是一个设计良好的工程目录，能极大的提高工作效率。
+而当项目需要多人合作进行时，
+符合业界通行规范的工程目录组织也能帮助项目合作者更好地理解项目。
+
+本附录提供了一些简单的项目工程目录规范建议，
+课程实验提交的每个项目都应该遵循某种规范，
+可以是参考本附录中提供的规范，也可以是本附录参考文献中提到的规范，
+或者是自己按照业界管理进一步定义的规范。
+但是需要注意，每个小组内部的同类项目的规范应该一致。
+
+\section{工程目录结构}
+\label{sec:dir_structure}
+
+“工程”的目录结构是首先应该注意的问题。
+一般为了配合软件开发工具，以及包管理工具的使用，
+“工程”的目录结构常会按照不同的程序设计语言配置为业界通行的模式。
+在本附录中，列出了Python语言与Node.js语言的的通行目录结构。
+
+注意：这里列出的目录结构仅作为参考，在实际使用中可以按照需要进行调整。
+以下示例均以“Foo”作为示例项目名。
+
+\subsection{Python项目目录结构}
+
+\dirtree{%
+  .1 Foo/.
+  .2 bin/\DTcomment{bin通常指二进制文件，一般用于存储可执行文件，可以是本项目编译后的输出}.
+  .3 foo.
+  .2 conf/\DTcomment{存储项目配置文件}.
+  .3 \_\_init\_\_.py.
+  .3 --settings.py.
+  .2 foo/\DTcomment{\begin{minipage}[t]{7cm}存储项目的所有源代码。注意：\\(1) 应该避免将源代码置于顶层目录\\(2) 单元测试代码一般存储于tests/目录中\\(3) 程序的入口通常命名为main.py\end{minipage}}.
+  .3 tests/.
+  .4 \_\_init\_\_.py.
+  .4 test\_main.py.
+  .3 \_\_init\_\_.py.
+  .3 main.py.
+  .2 docs/\DTcomment{存储项目文档，内部可以结构可以自行组织}.
+  .3 conf.py.
+  .2 setup.py\DTcomment{安装、部署、打包的脚本}.
+  .2 requirements.txt\DTcomment{存放软件依赖的外部Python包列表}.
+  .2 Readme.md\DTcomment{项目说明文件}.
+}
+
+上面是一个典型的Python项目工程的目录结构。
+在Python项目中，一般将配置文件单独放置在工程根目录下，
+而将源代码放置在一个独立的与工程同名的目录下。
+同时，一般会编写一个setup.py脚本用于项目的安装、部署与打包等工作，
+项目对第三方库的依赖通常写在一个requirements.txt的文本文件中。
+
+\subsection{Node.js项目目录结构：}
+
+\dirtree{%
+  .1 Foo/.
+  .2 bin/\DTcomment{存储项目脚本}.
+  .3 env.js.
+  .2 node\_modules/\DTcomment{存储项目依赖文件}.
+  .2 public/\DTcomment{存储项目的静态文件}.
+  .3 images/\DTcomment{存储项目的图片文件}.
+  .3 javascripts/\DTcomment{存储项目的JS文件}.
+  .3 stylesheets/\DTcomment{存储项目的CSS文件}.
+  .2 routes/\DTcomment{存储路由控制器脚本}.
+  .3 routes.js.
+  .3 handles/.
+  .2 models/\DTcomment{存储数据模型(即MVC模型中的M)}.
+  .2 views/\DTcomment{存储视图目录或页面文件(即MVC模型中的V)}.
+  .3 error.ejs.
+  .3 index.ejs.
+  .2 controllers\DTcomment{存储控制器，对请求的操作(即MVC模型中的C)}.
+  .2 tools/\DTcomment{存储项目工具}.
+  .2 configs/\DTcomment{存储项目配置}.
+  .2 docs/\DTcomment{存储项目文档}.
+  .2 foo.js\DTcomment{项目入口及程序启动文件}.
+  .2 package.json\DTcomment{包描述文件及开发者信息}.
+  .2 Readme.md\DTcomment{项目说明文件}.
+  .2 ReleaseNotes.md.\DTcomment{发行公告}.
+}
+
+上面是一个典型的基于MVC模型的Node.js Web项目工程的目录结构，因此在根目录中能看到routes、models、views、controllers等目录。
+需要注意的是，在Node.js中，node\_modules通常是npm管理器基于package.json自动生成的。
+
+\section{项目说明文件}
+
+在第\ref{sec:dir_structure}节给出的目录结构中，
+可以看到存在Readme.md、ReleaseNotes.md等文件。
+这些文件是项目的一些公用说明文件，用于说明项目的一些基本情况，
+通常包括Readme、ReleaseNotes、History、ChangeLog、Lisence等等，
+在本节中简单介绍Readme、ReleaseNotes两种文件的写法。
+项目可以根据实际选择包含若干上述文件。
+
+\subsection{Readme文件}
+
+Readme是一个项目最基础的说明文件，这是每个项目中都应该包含的有的一个文件，
+其目的是能简要的描述该项目的基本信息，让用户或其他开发者快速了解该项目。
+
+\begin{enumerate}
+  \item 该文件通常需要说明以下事项：
+        \begin{itemize}
+          \item 软件定位，软件的基本功能
+          \item 运行代码的方法：安装环境，启动命令等
+          \item 简要的使用说明
+          \item 代码目录结构说明，更详细点可以说明软件的基本原理
+          \item 常见问题说明
+        \end{itemize}
+  \item 通常包括以下内容：
+        \begin{itemize}
+          \item 项目简介：说明项目的背景，应用场景和作者等信息
+          \item 功能特性：项目的功能和特点
+          \item 环境依赖：项目的依赖和环境要求
+          \item 部署步骤：如何部署这个项目，具体操作步骤
+          \item 目录结构描述：整个项目的目录结构，对各个文件夹存放的东西进行描述
+          \item 版本内容更新：各个版本更新的功能及更新日期等，也可以放在单独的ChangeLog文件中
+          \item 声明：对于这个项目的一些法律声明，如转载和使用需标注网址和作者等
+          \item 协议：开源版本协议，也可以放在单独的Lisence文件中
+        \end{itemize}
+\end{enumerate}
+
+Readme文件一般是文本文件，文件名可以是简单的全大写README或者README.txt，
+也可以是驼峰命名风格的ReadMe。
+在目前通常会基于Markdown（\href{https://www.jianshu.com/p/q81RER}
+{链接}）撰写Readme文件，此时也可以用md作为文件扩展名。
+注意，在一个工程中，各类说明文件会使用一致的命名风格。
+
+下面是一个基于Markdown编写的Node.js项目的简单Readme文件范本：
+
+\begin{listings}[md]
+  # DEMO（项目名）
+
+  ## 环境依赖
+  node v0.10.28+
+  redIs ~
+  ## 部署步骤
+  1. 添加系统环境变量
+  export $PORTAL_VERSION="production" // production, test, dev
+
+  2. npm install  //安装node运行环境
+
+  3. gulp build   //前端编译
+
+  4. 启动两个配置(已forever为例)
+  eg: forever start app-service.js
+  forever start logger-service.js
+
+  ## 目录结构描述
+  +-- Readme.md                   // help
+  +-- app                         // 应用
+  +-- config                      // 配置
+  |   +-- default.json
+  |   +-- dev.json                // 开发环境
+  |   +-- experiment.json         // 实验
+  |   +-- index.js                // 配置控制
+  |   +-- local.json              // 本地
+  |   +-- production.json         // 生产环境
+  |   +-- test.json               // 测试环境
+  +-- data
+  +-- doc                         // 文档
+  +-- environment
+  +-- gulpfile.js
+  +-- locales
+  +-- logger-service.js           // 启动日志配置
+  +-- node_modules
+  +-- package.json
+  +-- app-service.js              // 启动应用配置
+  +-- static                      // web静态资源加载
+  |   +-- initjson
+  |       +-- config.js         // 提供给前端的配置
+  +-- test
+  +-- test-service.js
+  +-- tools
+
+  ## V1.0.0 版本内容更新
+  1. 新功能     aaaaaaaaa
+  2. 新功能     bbbbbbbbb
+  3. 新功能     ccccccccc
+  4. 新功能     ddddddddd
+\end{listings}
+
+\subsection{Release Note文件}
+RELEASE NOTE是一种指导用户使用项目的说明文档，也详细记录了项目更新、改正、优化和功能增加的历史记录，主要的目标用户是项目程序的使用者。
+
+\begin{enumerate}
+  \item 基本结构：
+        \begin{itemize}
+          \item 引言：给出项目的一些基本信息，包括文档名称 （比如：版本说明）、程序名称、版本号、发布日期等，简明扼要的描述程序的功能更改优化。版本迭代过程最好以表格形式在首页直观呈现。
+          \item 发布内容
+              \begin{itemize}
+          	      \item 目录结构：程序的目录树结构及基本功能的介绍。
+          	      \item 版本更新详情：概述版本说明的目的，比如新的功能更新，或者修复的bug等。需要具体列出版本更新详情，每个版本详情内容包括：
+          	      1、版本序号：项目程序对应的版本号。
+          	      2、问题列表：更新，优化的功能列表以及修复的bug列表。
+          	      3、重现步骤：如果有bug修复，应该描述之前bug的重现步骤。
+          	      4、解决方案：针对bug的修复方案等。
+          	      \item 编译环境：项目编译运行环境及条件，可以按不同操作系统说明。
+          	      \item 用户环境变量：项目所需各种依赖的用户环境变量设置。
+          	      \item 编译过程：项目编译方法及各功能的简要验证说明。
+             \end{itemize}
+          \item 部署环境要求：
+             \begin{itemize}
+             	\item 硬件要求：运行项目程序的硬件最小要求。
+            	\item 软件要求：运行项目程序的硬件最小要求。
+          	    \item 启动须知：运行项目程序的一些注意事项，包括局限性说明。
+            \end{itemize}
+          \item 项目配置文件说明：项目配置文件及其配置项的说明。
+          \item 数据库设计/数据结构：项目使用的重要数据结构或数据库表设计说明。
+        \end{itemize}
+  \item \href{https://www.cnblogs.com/wj-1314/p/8547763.html} {参考模板}
+\end{enumerate}
+
+
+\section{参考网址}
+\begin{enumerate}
+	
+  \item 程序目录结构：
+  \begin{itemize}
+        \item
+               \href{https://blog.csdn.net/aocheng6822/article/details/102252251?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task} {为什么要设计好目录结构?}
+        \item \href{https://www.cnblogs.com/0zcl/p/6034396.html}
+               {软件目录结构规范}
+        \item \href{https://www.cnblogs.com/jiangzhaowei/p/9745310.html}
+               {JavaWeb工程目录结构}
+        \item \href{https://blog.csdn.net/weixin_44547599/article/details/90763754}
+               {Java项目的目录结构}
+        \item \href{https://github.com/hattonl/cpp-project-structure}
+               {C/C++项目目录结构}
+   \end{itemize}
+
+\item 文档写作规范：
+\begin{itemize}
+	\item \href{https://www.cnblogs.com/wj-1314/p/8547763.html}
+	     {如何为开发项目编写规范的README文件（windows），此文详解。}
+	\item \href{https://www.zhihu.com/question/29100816}
+	     {如何写好Github中的readme？}
+	\item \href{https://www.jianshu.com/p/813b70d5b0de}
+  	     {开发工具总结（9）之开源项目的README文档的最全最规范写法}
+	\item \href{https://github.com/guodongxiaren/README}
+	     {README实例}
+	\item \href{https://www.jianshu.com/p/q81RER}
+	     {献给写作者的 Markdown 新手指南}
+	\item Release note示例\\
+	    \href{https://www.jianshu.com/p/74945cce3367}{示例一}\\
+	    \href{https://www.jianshu.com/p/2e98ee19be68}{示例二}\\
+	    \href{https://help.aliyun.com/document_detail/26375.html}{示例三}
+\end{itemize}
+
+\item 教程：
+\begin{itemize}
+	\item Nodejs教程：\\
+	    \href{https://www.w3cschool.cn/nodejs/}{教程一}\\
+	    \href{https://www.runoob.com/nodejs/nodejs-tutorial.html}{教程二}
+\end{itemize}
+
+\end{enumerate}

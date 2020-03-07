@@ -1,0 +1,37 @@
+% !TEX program = xelatex
+% !TEX options = -shell-escape
+
+\documentclass[UTF8,oneside]{ctexbook}
+\usepackage{pdfpages}
+
+\input{../setup/assigmentsformat.tex}
+\setcounter{secnumdepth}{4} 
+
+% set figure path
+\graphicspath{{../figures/global/}{../figures/instructions/}}
+
+%页眉右边位置内容
+\rhead{实验指导书}
+
+\title{\large 网络程序设计 - 实验指导书}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\includepdfmerge{cover.pdf}
+
+\tableofcontents
+
+\chapter{实验一\ ？}
+\input{data/chapter.01.tex}
+
+\appendix
+\chapter{工程目录规范}
+\input{data/appendix.01.tex}
+
+\chapter{评分标准}
+\input{data/appendix.02.tex}
+
+\end{document}

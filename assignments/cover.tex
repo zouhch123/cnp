@@ -1,0 +1,27 @@
+\documentclass[UTF8]{ctexart}
+\usepackage[centering,width=8.5in,height=11in]{geometry}
+\usepackage{pstricks}
+\usepackage{graphicx}
+
+% set figure path
+\graphicspath{{../figures/global/}{../figures/assignments/}}
+
+\pagestyle{empty}
+\begin{document}
+
+\psset{unit=1in}
+\begin{pspicture}(8.5,11)% use your page size
+    \rput[b](3.5,8){\parbox{5in}{
+            \LARGE\bfseries\sffamily 网络程序设计
+        }}
+    \rput[b](3.5,7.3){\parbox{5in}{
+            \Huge\bfseries\sffamily 实验指导书
+        }}
+    \uput[-90](3.5,7.2){\color[RGB]{25,83,51}\rule{5in}{1ex}}
+    \rput[b](3.5,5.3){\parbox{5in}{
+            % \includegraphics[scale=0.5]{logo.png}
+            \includegraphics[scale=0.15]{ano_logo.png}
+        }}
+\end{pspicture}
+
+\end{document}

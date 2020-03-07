@@ -1,0 +1,42 @@
+\ctexset{
+  section={
+    name={第,节},
+    number=\arabic{section},
+    format={\Large\bfseries}}
+}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage[colorlinks]{hyperref}
+\usepackage[breakable,minted]{tcolorbox}
+% \usemintedstyle{colorful}
+\usepackage{dirtree}
+
+\geometry{scale=0.8}
+
+\fancyhf{}
+% \lhead{\includegraphics[scale=0.1]{logo.png}}  %在此处插入logo.pdf图片 图片靠左
+\lhead{\includegraphics[scale=0.03]{ano_logo.png}}  %在此处插入logo.pdf图片 图片靠左
+\chead{\textnormal{\kaishu\rightmark}} % 页眉中间位置内容
+\fancyfoot[C]{\thepage}
+
+\pagestyle{fancy}
+\renewcommand\sectionmark[1]{
+  \markright{\CTEXifname{\CTEXthesection——}{}#1}}
+
+\newtcblisting{listings}[1][]{
+  center,
+  width=0.9\linewidth,
+  listing only,
+  breakable=true,
+  minted language=#1,
+  frame empty,
+  extras={frame empty},
+  % minted style=colorful,
+  minted options={ %自动移除前置空白、制表为4字符、mathhe和||内的不处理
+      autogobble,tabsize=4,startinline,breaklines,mathescape}}
