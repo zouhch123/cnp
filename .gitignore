@@ -21,3 +21,4 @@ presentations/*.pdf
 _minted-*
 *.exe
 *.obj
+*.listing
